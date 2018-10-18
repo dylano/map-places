@@ -1,0 +1,41 @@
+.App-sidebar {
+  background-color: lightblue;
+  min-height: 100vh;
+  border-right: 2px solid black;
+  padding: 10px;
+  flex: 0 0 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.sidebar-title {
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.sidebar-user {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-user-title,
+.sidebar-list-title {
+  font-size: 10px;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+.sidebar-user-img img {
+  height: 50px;
+  border-radius: 10px;
+}
+
+.sidebar-user-name {
+  width: 50px;
+  margin: 10px;
+}
+
+.sidebar-user-info {
+  display: flex;
+  align-items: center;
+}
