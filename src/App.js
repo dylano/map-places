@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Sidebar from "./Sidebar";
 import MapContainer from "./MapContainer";
 import "./App.css";
+require("dotenv").config();
 
 class App extends Component {
   state = {
@@ -9,7 +10,6 @@ class App extends Component {
       name: "Dylan Oliver",
       img: "https://s.gravatar.com/avatar/7d06dc0f5b25c64d3945595e83a0c7bd?s=80"
     },
-    apiKey: "AIzaSyBmWBXDxJdQhNqBCESzje6X3VZ5jO3loBg",
     places: [{ cityName: "Half Moon Bay", lat: 37.464, lng: -122.4414 }]
   };
 
@@ -17,17 +17,15 @@ class App extends Component {
     return new Promise((resolve, reject) => {
       fetch(
         `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${
-          this.state.apiKey
+          process.env.REACT_APP_GOOGLE_API_KEY
         }`
       )
         .then(data => data.json())
         .then(locationData => {
-          console.log(locationData);
           if (locationData.results) {
             const locality = locationData.results.filter(loc =>
               loc.types.includes("locality")
             );
-            console.log(locality);
             if (locality && locality[0]) {
               resolve(locality[0].formatted_address);
             }
