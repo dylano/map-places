@@ -1,22 +1,15 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 
 export class MapContainer extends Component {
-  state = {
-    markers: [{ lat: 37.464, lng: -122.4414 }, { lat: 40, lng: -100 }]
-  };
-
-  onMapClicked(mapProps, map, clickEvent) {
-    console.log(clickEvent, clickEvent.latLng.lat(), clickEvent.latLng.lng());
-  }
-
-  render() {
+  render(props) {
     const style = {
       width: "100%",
       height: "100%"
     };
 
-    const markers = this.state.markers.map((marker, idx) => (
+    const markers = this.props.places.map((marker, idx) => (
       <Marker key={idx} position={{ lat: marker.lat, lng: marker.lng }} />
     ));
 
@@ -29,7 +22,7 @@ export class MapContainer extends Component {
           lat: 40,
           lng: -100
         }}
-        onClick={this.onMapClicked}
+        onClick={this.props.onMapClicked}
       >
         {markers}
       </Map>
