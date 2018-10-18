@@ -2,9 +2,19 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./Sidebar.css";
 
-const Sidebar = ({ user, places }) => {
+const Sidebar = ({ user, places, onRemovePlace }) => {
   const placeList = places.map(place => (
-    <li key={place.lat}>{place.cityName}</li>
+    <li className="sidebar-placelist-item" key={place.lat}>
+      <span>{place.cityName}</span>
+      <span>
+        <a
+          className="sidebar-placelist-remove-btn"
+          onClick={() => onRemovePlace(place.cityName)}
+        >
+          x
+        </a>
+      </span>
+    </li>
   ));
 
   return (
@@ -30,7 +40,9 @@ const Sidebar = ({ user, places }) => {
   );
 };
 Sidebar.propTypes = {
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
+  places: PropTypes.array.isRequired,
+  onRemovePlace: PropTypes.func.isRequired
 };
 
 export default Sidebar;

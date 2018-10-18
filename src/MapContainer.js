@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
+import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
 
 export class MapContainer extends Component {
   render(props) {
@@ -29,6 +29,10 @@ export class MapContainer extends Component {
     );
   }
 }
+MapContainer.propTypes = {
+  onMapClicked: PropTypes.func.isRequired,
+  places: PropTypes.array.isRequired
+};
 
 export default GoogleApiWrapper({
   apiKey: "AIzaSyBmWBXDxJdQhNqBCESzje6X3VZ5jO3loBg"

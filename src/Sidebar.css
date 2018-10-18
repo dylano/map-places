@@ -3,10 +3,10 @@
   min-height: 100vh;
   border-right: 2px solid black;
   padding: 10px;
-  flex: 0 0 200px;
+  flex: 0 0 250px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .sidebar-title {
@@ -38,4 +38,30 @@
 .sidebar-user-info {
   display: flex;
   align-items: center;
+}
+
+.sidebar-placelist ul {
+  margin-top: 0;
+  list-style: none;
+  padding-left: 0;
+  background-color: white;
+  line-height: 1.5;
+}
+
+.sidebar-placelist-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidebar-placelist-remove-btn {
+  margin-right: 5px;
+  border: 1px solid black;
+  padding: 1px;
+  font-size: 0.5em;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.sidebar-placelist-remove-btn:hover {
+  color: red;
 }

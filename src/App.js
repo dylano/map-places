@@ -23,7 +23,19 @@ class App extends Component {
         .then(data => data.json())
         .then(locationData => {
           console.log(locationData);
-          resolve(locationData.plus_code.compound_code);
+          if (locationData.results) {
+            const locality = locationData.results.filter(loc =>
+              loc.types.includes("locality")
+            );
+            console.log(locality);
+            if (locality && locality[0]) {
+              resolve(locality[0].formatted_address);
+            }
+            if (locality.plus_code) {
+              resolve(locality.plus_code.compound_code);
+            }
+          }
+          resolve(`${lat.toFixed(2)},${lng.toFixed(2)}`);
         });
     });
   };
@@ -34,7 +46,21 @@ class App extends Component {
     const cityName = await this.getCityName(lat, lng);
     if (cityName) {
       this.setState({
-        places: [...this.state.places, { cityName, lat, lng }]
+        places: [...this.state.places, { cityName, lat, lng }].sort(
+          (a, b) => a.cityName > b.cityName
+        )
+      });
+    }
+  };
+
+  onRemovePlace = cityName => {
+    console.log(`remove ${cityName}`);
+    const idx = this.state.places.findIndex(
+      place => place.cityName === cityName
+    );
+    if (idx >= 0) {
+      this.setState({
+        places: this.state.places.filter(place => place.cityName !== cityName)
       });
     }
   };
@@ -42,7 +68,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Sidebar user={this.state.user} places={this.state.places} />
+        <Sidebar
+          user={this.state.user}
+          places={this.state.places}
+          onRemovePlace={this.onRemovePlace}
+        />
         <MapContainer
           places={this.state.places}
           onMapClicked={this.onMapClicked}
